@@ -1,21 +1,24 @@
-import { SiteHeader } from "@/components/marketing/site-header";
-import { Hero } from "@/components/marketing/hero";
-import { Features } from "@/components/marketing/features";
-import { SocialProof } from "@/components/marketing/social-proof";
-import { Pricing } from "@/components/marketing/pricing";
-import { CtaFooter } from "@/components/marketing/cta-footer";
+import { HomePageContent } from "@/components/socialflow/pages/home-page";
+import { organizationJsonLd } from "@/lib/socialflow";
+import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/socialflow";
+
+export const metadata: Metadata = buildMetadata(
+  "Social Media Automation Tools for Creators | SocialFlow",
+  "Explore social media automation tools for daily posts, AI captions, reels and Meta ads. Plan five platforms in one SocialFlow workspace and keep creative control.",
+  "/"
+);
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen">
-      <SiteHeader />
-      <main>
-        <Hero />
-        <Features />
-        <SocialProof />
-        <Pricing />
-        <CtaFooter />
-      </main>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationJsonLd()),
+        }}
+      />
+      <HomePageContent />
+    </>
   );
 }
