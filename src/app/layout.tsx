@@ -1,14 +1,24 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { DM_Sans, Manrope } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
+import { buildMetadata } from "@/lib/socialflow";
 
-const inter = Inter({ subsets: ["latin"] });
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+});
 
-export const metadata: Metadata = {
-  title: "SocialFlow — Multi-platform social automation",
-  description:
-    "Automate Facebook, Instagram, X, YouTube, and Pinterest from one dashboard.",
-};
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+});
+
+export const metadata: Metadata = buildMetadata(
+  "SocialFlow — Your social presence, in one flow",
+  "SocialFlow brings social content planning, automation, reels and ads into one workspace.",
+  "/"
+);
 
 export default function RootLayout({
   children,
@@ -16,8 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${dmSans.variable} ${manrope.variable} font-sans`}>
+        {children}
+        <Toaster richColors position="top-center" />
+      </body>
     </html>
   );
 }
